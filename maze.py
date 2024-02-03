@@ -11,9 +11,10 @@ w = (255,255,255)
 x = 1
 y = 1
 
-
+#loop condition
 game_over = False
 
+#Moves marbles based on gyroscope orientation taken during while loop
 def move_marble(pitch, roll, x, y):
     new_x = x
     new_y = y
@@ -46,6 +47,8 @@ maze = [
         [r,b,b,r,b,b,b,r],
         [r,r,r,r,r,r,r,r]
     ]
+
+#Checks if a given pixel is an "r" labels pixeled
 def check_wall(x, y, new_x, new_y):
     if maze[new_y][new_x] != r:
         return new_x, new_y
@@ -55,24 +58,26 @@ def check_wall(x, y, new_x, new_y):
         return new_x,y
     else:
         return x,y
-#Code setup
 
+#Starting pixel y = 1, x = 1
 maze[y][x] = w
 
 while game_over == False:
 
-    #Orientation
+    #Gyroscope Orientation
     o = sense.get_orientation()
     pitch = o["pitch"]
     roll = o["roll"]
-    yaw = o["yaw"]
-    print("pitch {0}, roll {1}, yaw{2}, y {3}, x {4}".format(pitch,roll,yaw,y,x))
+
+    #Sends pitch/roll values to move_marble to determine if the new position of x/y
     x, y = move_marble(pitch,roll,x,y)
     maze[y][x] = w
+
+    #Sets new pixels
     sense.set_pixels(sum(maze, []))
+
+    #Slows maze ball movement
     sleep(0.15)
+    
+    #The newly placed LED is removed immediately to allow for the new position of LED to be lit
     maze[y][x] = b
-
-   
-#pixel setup
-
