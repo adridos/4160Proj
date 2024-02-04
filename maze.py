@@ -8,7 +8,8 @@ sense.clear()
 r = (255, 0, 0)
 b = (0, 0, 0)
 w = (255,255,255)
-x = 1
+f = (255,255,0)
+x = 0
 y = 1
 
 #loop condition
@@ -39,13 +40,13 @@ def move_marble(pitch, roll, x, y):
 #Define maze boundaries
 maze = [
         [r,r,r,r,r,r,r,r],
-        [r,b,b,b,b,b,b,r],
-        [r,r,r,b,r,b,b,r],
-        [r,b,r,b,r,r,r,r],
-        [r,b,b,b,b,b,b,r],
-        [r,b,r,r,r,r,b,r],
-        [r,b,b,r,b,b,b,r],
-        [r,r,r,r,r,r,r,r]
+        [b,b,r,b,b,b,r,r],
+        [r,b,r,b,r,b,b,r],
+        [r,b,b,b,r,r,r,r],
+        [r,r,r,b,b,b,b,r],
+        [r,b,r,b,r,r,b,r],
+        [r,b,b,b,r,r,b,r],
+        [r,r,r,r,r,r,f,r]
     ]
 
 #Checks if a given pixel is an "r" labels pixeled
@@ -59,8 +60,11 @@ def check_wall(x, y, new_x, new_y):
     else:
         return x,y
 
-#Starting pixel y = 1, x = 1
-maze[y][x] = w
+def check_game(y, x):
+    if maze[y][x] is f:
+        return True
+    else:
+        return False
 
 while game_over == False:
 
@@ -71,8 +75,12 @@ while game_over == False:
 
     #Sends pitch/roll values to move_marble to determine if the new position of x/y
     x, y = move_marble(pitch,roll,x,y)
+    
+    game_over = check_game(y,x)
+
     maze[y][x] = w
 
+    
     #Sets new pixels
     sense.set_pixels(sum(maze, []))
 
@@ -81,3 +89,6 @@ while game_over == False:
     
     #The newly placed LED is removed immediately to allow for the new position of LED to be lit
     maze[y][x] = b
+
+sense.clear()
+sense.show_message("Your did it", text_colour=f, back_colour=b, scroll_speed=0.05)
