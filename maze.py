@@ -91,4 +91,4 @@ while game_over == False:
     maze[y][x] = b
 
 sense.clear()
-sense.show_message("Your did it", text_colour=f, back_colour=b, scroll_speed=0.05)
+sense.show_message("You did it", text_colour=f, back_colour=b, scroll_speed=0.05)
