@@ -116,12 +116,7 @@ while True:
         if event.action == 'pressed':
             if event.direction == 'up':
                 # Send sensor data when the up arrow is pressed
-                while True:
-                    for event in sense.stick.get_events():
-                        if event.action == 'pressed' and event.direction == 'left':
-                            break 
-                    send_sensor_data_to_server()
-                    sleep(2)
+                send_sensor_data_to_server()
                                      
             elif event.direction == 'right':
                 x = 0
@@ -161,4 +156,7 @@ while True:
                 # Clear the Sense HAT display after the game is over
                 sense.clear()
                 game_over = False
+            elif event.direction == 'left':
+                sense.clear()
+                exit()
                 
