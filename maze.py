@@ -2,11 +2,20 @@ import requests
 from sense_hat import SenseHat
 from time import sleep
 
-from resource_monitor import monitor_resources
+from resource_monitor import fetch_monitoring_info
 
 
 sense = SenseHat()
 sense.clear()
+
+#Initial prompt for user
+
+print("Welcome to the Sense HAT Controller")
+print("Press the joystick to interact with the Sense HAT")
+print("Press the up arrow to send sensor data to the server")
+print("Press the right arrow to start the maze game")
+print("Press the down arrow to fetch monitoring information")
+print("Press the left arrow to exit the program")
 
 # Variables for maze game
 r = (255, 0, 0)
