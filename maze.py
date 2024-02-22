@@ -16,7 +16,7 @@ y = 1
 game_over = False
 
 # Variables for sensor data
-sensor_url = 'http://34.29.5.213:your-server-port/sensor-data'  # Update with your server details
+sensor_url = 'http://34.29.5.213/update-sensor-data'  # Update with your server details
 
 # Function to read sensor data
 def read_sensor_data():
@@ -105,6 +105,7 @@ while True:
             if event.direction == 'up':
                 # Send sensor data when the up arrow is pressed
                 while True:
+                    
                     send_sensor_data_to_server()
                     sleep(2)
                     if sense.stick.get_events() == 'pressed' and event.direction == 'left':
