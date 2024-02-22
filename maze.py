@@ -78,6 +78,7 @@ def define_maze():
         [r, b, b, b, r, r, b, r],
         [r, r, r, r, r, r, f, r]
     ]
+    return maze
 
 # Checks if a given pixel is an "r" labeled pixel
 def check_wall(x, y, new_x, new_y):
@@ -116,17 +117,17 @@ while True:
             if event.direction == 'up':
                 # Send sensor data when the up arrow is pressed
                 while True:
-
+                    for event in sense.stick.get_events():
+                        if event.action == 'pressed' and event.direction == 'left':
+                            break 
                     send_sensor_data_to_server()
                     sleep(2)
-                    if sense.stick.get_events() == 'pressed' and event.direction == 'left':
-                        break
-                        
+                                     
             elif event.direction == 'right':
                 x = 0
                 y = 1
                 maze[y][x] = w
-                define_maze()
+                maze = define_maze()
                 # Start the maze game when the right arrow is pressed
                 while game_over == False:
 
@@ -152,10 +153,12 @@ while True:
                     #The newly placed LED is removed immediately to allow for the new position of LED to be lit
                     maze[y][x] = b
 
-                    if sense.stick.get_events() == 'pressed' and event.direction == 'left':
-                        break
+                    for event in sense.stick.get_events():
+                        if event.action == 'pressed' and event.direction == 'left':
+                            game_over=True
+                            break
+                    
                 # Clear the Sense HAT display after the game is over
                 sense.clear()
-                sense.show_message("You did it", text_colour=f, back_colour=b, scroll_speed=0.05)
                 game_over = False
                 
