@@ -1,7 +1,9 @@
 import requests
 from sense_hat import SenseHat
 from time import sleep
-from sense_hat import SenseHat
+
+from resource_monitor import monitor_resources
+
 
 sense = SenseHat()
 sense.clear()
@@ -156,6 +158,10 @@ while True:
                 # Clear the Sense HAT display after the game is over
                 sense.clear()
                 game_over = False
+            
+            elif event.direction == 'down':
+                monitor_resources()
+
             elif event.direction == 'left':
                 sense.clear()
                 exit()
