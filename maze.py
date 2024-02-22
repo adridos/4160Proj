@@ -160,7 +160,16 @@ while True:
                 game_over = False
             
             elif event.direction == 'down':
-                monitor_resources()
+                # Fetch monitoring information when the down arrow is pressed
+                monitoring_info = fetch_monitoring_info("http://34.29.5.213/monitoring")
+                if monitoring_info:
+                    print("Monitoring Information:")
+                    print(f"CPU Usage: {monitoring_info['cpu_usage']}%")
+                    print(f"Memory Usage: {monitoring_info['memory_usage']}%")
+                    print(f"Disk Usage: {monitoring_info['disk_usage']}%")
+                    # Add more processing for additional monitoring data if needed
+                else:
+                    print("Failed to fetch monitoring information")
 
             elif event.direction == 'left':
                 sense.clear()
