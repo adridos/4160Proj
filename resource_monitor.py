@@ -1,36 +1,36 @@
-import psutil
+import requests
 import time
 
-def monitor_resources(interval=1):
+# Function to fetch monitoring information from the Flask API
+def fetch_monitoring_info(api_url):
+    try:
+        response = requests.get(api_url)
+        if response.status_code == 200:
+            monitoring_data = response.json()
+            return monitoring_data
+        else:
+            print(f"Error: {response.status_code}")
+            return None
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+
+# Main loop to continuously fetch monitoring information
+if __name__ == "__main__":
+    # URL of your Flask API endpoint
+    api_url = "http://34.29.5.213/monitoring"
+
     while True:
-        # Get CPU usage
-        cpu_percent = psutil.cpu_percent(interval=None)
+        # Fetch monitoring information from the API
+        monitoring_info = fetch_monitoring_info(api_url)
+        if monitoring_info:
+            print("Monitoring Information:")
+            print(f"CPU Usage: {monitoring_info['cpu_usage']}%")
+            print(f"Memory Usage: {monitoring_info['memory_usage']}%")
+            print(f"Disk Usage: {monitoring_info['disk_usage']}%")
+            # Add more print statements for additional monitoring data if needed
+        else:
+            print("Failed to fetch monitoring information")
 
-        # Get memory usage
-        memory = psutil.virtual_memory()
-        memory_total = memory.total
-        memory_used = memory.used
-        memory_percent = memory.percent
-
-        # Get disk usage
-        disk = psutil.disk_usage('/')
-        disk_total = disk.total
-        disk_used = disk.used
-        disk_percent = disk.percent
-
-        # Get network usage
-        network = psutil.net_io_counters()
-        network_bytes_sent = network.bytes_sent
-        network_bytes_received = network.bytes_recv
-
-        # Print resource usage
-        print(f'CPU Usage: {cpu_percent}%')
-        print(f'Memory Usage: {memory_used} / {memory_total} bytes ({memory_percent}%)')
-        print(f'Disk Usage: {disk_used} / {disk_total} bytes ({disk_percent}%)')
-        print(f'Network Usage: Sent: {network_bytes_sent} bytes, Received: {network_bytes_received} bytes')
-
-        # Wait for the specified interval
-        time.sleep(interval)
-
-# Start monitoring resources
-monitor_resources()
+        # Wait for some time before fetching again (e.g., every 5 seconds)
+        time.sleep(5)
