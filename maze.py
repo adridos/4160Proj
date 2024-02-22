@@ -114,25 +114,28 @@ while True:
             elif event.direction == 'right':
                 maze[y][x] = w
                 # Start the maze game when the right arrow is pressed
-                while not game_over:
-                    # Gyroscope Orientation
+                while game_over == False:
+
+                    #Gyroscope Orientation
                     o = sense.get_orientation()
                     pitch = o["pitch"]
                     roll = o["roll"]
 
-                    # Move marble based on gyroscope orientation
-                    x, y = move_marble(pitch, roll, x, y)
+                    #Sends pitch/roll values to move_marble to determine if the new position of x/y
+                    x, y = move_marble(pitch,roll,x,y)
+                    
+                    game_over = check_game(y,x)
 
-                    # Check if game is over
-                    game_over = check_game(y, x)
+                    maze[y][x] = w
 
-                    # Set new pixels
+                    
+                    #Sets new pixels
                     sense.set_pixels(sum(maze, []))
 
-                    # Slow down marble movement
+                    #Slows maze ball movement
                     sleep(0.15)
-
-                    # Remove the newly placed LED immediately to allow for the new position of LED to be lit
+                    
+                    #The newly placed LED is removed immediately to allow for the new position of LED to be lit
                     maze[y][x] = b
 
                     if sense.stick.get_events() == 'pressed' and event.direction == 'left':
