@@ -13,6 +13,7 @@ w = (255, 255, 255)
 f = (255, 255, 0)
 x = 0
 y = 1
+maze = []
 game_over = False
 
 # Variables for sensor data
