@@ -105,13 +105,14 @@ while True:
             if event.direction == 'up':
                 # Send sensor data when the up arrow is pressed
                 while True:
-                    
+
                     send_sensor_data_to_server()
                     sleep(2)
                     if sense.stick.get_events() == 'pressed' and event.direction == 'left':
                         break
                         
             elif event.direction == 'right':
+                maze[y][x] = w
                 # Start the maze game when the right arrow is pressed
                 while not game_over:
                     # Gyroscope Orientation
@@ -133,6 +134,7 @@ while True:
 
                     # Remove the newly placed LED immediately to allow for the new position of LED to be lit
                     maze[y][x] = b
+
                     if sense.stick.get_events() == 'pressed' and event.direction == 'left':
                         break
                 # Clear the Sense HAT display after the game is over
