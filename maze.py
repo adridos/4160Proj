@@ -56,17 +56,18 @@ def move_marble(pitch, roll, x, y):
 
     return new_x, new_y
 
-# Define maze boundaries
-maze = [
-    [r, r, r, r, r, r, r, r],
-    [b, b, r, b, b, b, r, r],
-    [r, b, r, b, r, b, b, r],
-    [r, b, b, b, r, r, r, r],
-    [r, r, r, b, b, b, b, r],
-    [r, b, r, b, r, r, b, r],
-    [r, b, b, b, r, r, b, r],
-    [r, r, r, r, r, r, f, r]
-]
+def define_maze():
+    # Define maze boundaries
+    maze = [
+        [r, r, r, r, r, r, r, r],
+        [b, b, r, b, b, b, r, r],
+        [r, b, r, b, r, b, b, r],
+        [r, b, b, b, r, r, r, r],
+        [r, r, r, b, b, b, b, r],
+        [r, b, r, b, r, r, b, r],
+        [r, b, b, b, r, r, b, r],
+        [r, r, r, r, r, r, f, r]
+    ]
 
 # Checks if a given pixel is an "r" labeled pixel
 def check_wall(x, y, new_x, new_y):
@@ -112,7 +113,10 @@ while True:
                         break
                         
             elif event.direction == 'right':
+                x = 0
+                y = 1
                 maze[y][x] = w
+                define_maze()
                 # Start the maze game when the right arrow is pressed
                 while game_over == False:
 
@@ -144,3 +148,4 @@ while True:
                 sense.clear()
                 sense.show_message("You did it", text_colour=f, back_colour=b, scroll_speed=0.05)
                 game_over = False
+                
