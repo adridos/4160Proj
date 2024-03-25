@@ -13,15 +13,15 @@ while True:
 	timestamp = datetime.now().strftime('%m-%d-%Y %H:%M:%S')
 	print(f'Motion Detected at {timestamp}')
 	
- 	# Send data to the server
-    	data = {'motion_detected': True, 'timestamp': timestamp}
-    	try:
-        	response = requests.post(server_url, json=data)
-        	print('Data sent to server:', response.text)
-   	except Exception as e:
-        	print('Error sending data to server:', e)
-    	
-	
+	# Send data to the server
+	data = {'motion_detected': True, 'timestamp': timestamp}
+	try:
+		response = requests.post(server_url, json=data)
+		print('Data sent to server:', response.text)
+
+	except Exception as e:
+		print('Error sending data to server:', e)
+
 	time.sleep(1) #avoid mult detections in one moment
 	pir.wait_for_no_motion()
 
