@@ -5,7 +5,7 @@ from gpiozero import MotionSensor
 
 
 pir = MotionSensor(4)
-server_url = 'http://34.16.94.36'  # Change the IP address and port to your GCP server's address
+server_url = 'http://35.192.215.225'  # Change the IP address and port to your GCP server's address
 
 while True:
 	pir.wait_for_motion()
@@ -21,6 +21,8 @@ while True:
 
 	except Exception as e:
 		print('Error sending data to server:', e)
+	
+
 
 	time.sleep(1) #avoid mult detections in one moment
 	pir.wait_for_no_motion()
