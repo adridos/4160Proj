@@ -8,7 +8,8 @@ pir = MotionSensor(4)
 server_url = 'http://35.192.215.225'  # Change the IP address and port to your GCP server's address
 
 while True:
-	pir.wait_for_motion()
+	#pir.wait_for_motion()
+	
 	print("Motion Detected: Potty Break!")
 	timestamp = datetime.now().strftime('%m-%d-%Y %H:%M:%S')
 	print(f'Motion Detected at {timestamp}')
