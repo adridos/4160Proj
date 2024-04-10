@@ -4,27 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Motion Detection Data</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
-<body id="body">
-    <h1 id="title">Motion Detection Data</h1>
-    <table id="data-table">
-        <thead>
-            <tr class="header-row">
-                <th class="header-cell">DB ID</th>
-                <th class="header-cell">Motion Detected</th>
-                <th class="header-cell">Timestamp</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in data %}
-            <tr class="data-row">
-                <td class="data-cell">{{ row[0] }}</td>
-                <td class="data-cell">{{ row[1] }}</td>
-                <td class="data-cell">{{ row[2] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<body>
+    <div class="container">
+        <h1 id="title">Motion Detection Data</h1>
+        <button id="refresh-button">Refresh Table</button>
+        <button id="delete-button">Delete Table Contents</button>
+
+        <table id="data-table">
+            <thead>
+                <tr class="header-row">
+                    <th class="header-cell">DB ID</th>
+                    <th class="header-cell">Motion Detected</th>
+                    <th class="header-cell">Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr class="data-row">
+                    <td class="data-cell">{{ row[0] }}</td>
+                    <td class="data-cell">{{ row[1] }}</td>
+                    <td class="data-cell">{{ row[2] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 </html>
