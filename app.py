@@ -2,7 +2,7 @@
 from flask import Flask, render_template, request, jsonify
 from flaskext.mysql import MySQL
 
-app = Flask(__name__, template_folder='/var/www/html')
+app = Flask(__name__, template_folder='/var/www/html', static_folder='/var/www/html/static')
 
 
 

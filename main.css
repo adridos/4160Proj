@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+}
+#title {
+    color: #333;
+}
+
+#data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.header-row {
+    background-color: #ddd;
+}
+
+.header-cell, .data-cell {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.data-row:nth-child(even) {
+    background-color: #f2f2f2;
+}
